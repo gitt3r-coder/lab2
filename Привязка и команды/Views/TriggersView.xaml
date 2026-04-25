@@ -1,0 +1,122 @@
+<UserControl x:Class="Привязка_и_команды.Views.TriggersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <Style x:Key="PropertyTriggerCardStyle" TargetType="Border" BasedOn="{StaticResource SectionStyle}">
+            <Setter Property="Background" Value="White" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E9F1FF" />
+                    <Setter Property="BorderBrush" Value="#2F6FED" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DataTriggerCardStyle" TargetType="Border" BasedOn="{StaticResource SectionStyle}">
+            <Setter Property="Background" Value="White" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsDangerMode}" Value="True">
+                    <Setter Property="Background" Value="#FFF1E8" />
+                    <Setter Property="BorderBrush" Value="#D9572B" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="MultiDataTriggerCardStyle" TargetType="Border" BasedOn="{StaticResource SectionStyle}">
+            <Setter Property="Background" Value="White" />
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding IsDangerMode}" Value="True" />
+                        <Condition Binding="{Binding SelectedTriggerItem}" Value="Критический" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Background" Value="#FFE2E2" />
+                    <Setter Property="BorderBrush" Value="#B42318" />
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="EventTriggerCardStyle" TargetType="Border" BasedOn="{StaticResource SectionStyle}">
+            <Setter Property="Background" Value="White" />
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             From="0.55"
+                                             To="1"
+                                             Duration="0:0:0.35" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="0,16,0,0"
+                    Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}">
+            <Border Style="{StaticResource SectionStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="0,0,12,0">
+                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="Управление данными для триггеров" />
+                        <CheckBox Content="Опасный режим"
+                                  IsChecked="{Binding IsDangerMode, Mode=TwoWay}"
+                                  Margin="0,8,0,8" />
+                        <ComboBox ItemsSource="{Binding TriggerItems}"
+                                  SelectedItem="{Binding SelectedTriggerItem, Mode=TwoWay}"
+                                  Width="220"
+                                  HorizontalAlignment="Left" />
+                        <TextBlock Text="Уровень" Margin="0,12,0,0" />
+                        <Slider Minimum="0" Maximum="100"
+                                Value="{Binding TriggerLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button Content="Переключить режим командой" Command="{Binding ToggleDangerCommand}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                        <TextBlock FontSize="20" FontWeight="SemiBold" Text="Состояние" />
+                        <TextBlock Text="{Binding IsDangerMode, StringFormat=Опасный режим: {0}}" />
+                        <TextBlock Text="{Binding SelectedTriggerItem, StringFormat=Выбранный пункт: {0}}" />
+                        <TextBlock Text="{Binding TriggerLevel, StringFormat=Уровень: {0}}" />
+                        <ProgressBar Minimum="0" Maximum="100" Height="16" Value="{Binding TriggerLevel}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <UniformGrid Columns="2">
+                <Border Style="{StaticResource PropertyTriggerCardStyle}" Margin="0,0,6,12">
+                    <StackPanel>
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="Trigger" />
+                        <TextBlock Text="Срабатывает по свойству самого элемента: наведите мышь на блок." />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource DataTriggerCardStyle}" Margin="6,0,0,12">
+                    <StackPanel>
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="DataTrigger" />
+                        <TextBlock Text="Срабатывает по свойству ViewModel: включите опасный режим." />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource MultiDataTriggerCardStyle}" Margin="0,0,6,12">
+                    <StackPanel>
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="MultiDataTrigger" />
+                        <TextBlock Text="Срабатывает только при опасном режиме и пункте Критический." />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource EventTriggerCardStyle}" Margin="6,0,0,12">
+                    <StackPanel>
+                        <TextBlock FontSize="18" FontWeight="SemiBold" Text="EventTrigger" />
+                        <TextBlock Text="Запускает анимацию по событию MouseEnter." />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

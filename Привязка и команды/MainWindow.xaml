@@ -1,0 +1,28 @@
+﻿<Window x:Class="Привязка_и_команды.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:Привязка_и_команды.Views"
+        mc:Ignorable="d"
+        Title="ЛР 2. Привязки и команды" Height="720" Width="980" MinHeight="620" MinWidth="820">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Привязка по умолчанию">
+                <views:DefaultBindingView />
+            </TabItem>
+            <TabItem Header="Двухсторонняя привязка">
+                <views:TwoWayBindingView />
+            </TabItem>
+            <TabItem Header="Одноразовая привязка">
+                <views:OneTimeBindingView />
+            </TabItem>
+            <TabItem Header="Односторонние привязки">
+                <views:OneWayBindingsView />
+            </TabItem>
+            <TabItem Header="Триггеры">
+                <views:TriggersView />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
