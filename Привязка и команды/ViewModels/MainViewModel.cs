@@ -3,11 +3,12 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using Привязка_и_команды.Infrastructure;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Привязка_и_команды.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ObservableObject
     {
         private string defaultInput = "Текст с режимом привязки по умолчанию";
         private string defaultNote = "Сообщение из визуальной модели";
@@ -33,41 +34,41 @@ namespace Привязка_и_команды.ViewModels
             ThemeOptions = new ObservableCollection<string> { "Светлая", "Контрастная", "Спокойная" };
             TriggerItems = new ObservableCollection<string> { "Обычный", "Важный", "Критический" };
 
-            ResetDefaultCommand = new RelayCommand(_ =>
+            ResetDefaultCommand = new RelayCommand(() =>
             {
                 DefaultInput = "Сброшено через команду";
                 DefaultNote = "Кнопка использует ICommand";
                 CommandCount++;
             });
 
-            SaveTwoWayCommand = new RelayCommand(_ =>
+            SaveTwoWayCommand = new RelayCommand(() =>
             {
                 DefaultNote = $"Сохранено: {UserName}, рейтинг {Rating}";
                 CommandCount++;
             });
 
-            GenerateSessionCodeCommand = new RelayCommand(_ =>
+            GenerateSessionCodeCommand = new RelayCommand(() =>
             {
                 SessionCode = "LR2-" + DateTime.Now.ToString("HHmmss");
                 CurrentTime = DateTime.Now.ToString("HH:mm:ss");
                 CommandCount++;
             });
 
-            IncreaseProgressCommand = new RelayCommand(_ =>
+            IncreaseProgressCommand = new RelayCommand(() =>
             {
                 Progress = Math.Min(100, Progress + 10);
                 OneWayText = $"Прогресс увеличен до {Progress}%";
                 CommandCount++;
             });
 
-            DecreaseProgressCommand = new RelayCommand(_ =>
+            DecreaseProgressCommand = new RelayCommand(() =>
             {
                 Progress = Math.Max(0, Progress - 10);
                 OneWayText = $"Прогресс уменьшен до {Progress}%";
                 CommandCount++;
             });
 
-            ApplyExplicitBindingCommand = new RelayCommand(parameter =>
+            ApplyExplicitBindingCommand = new RelayCommand<object>(parameter =>
             {
                 var textBox = parameter as TextBox;
                 BindingExpression expression = textBox?.GetBindingExpression(TextBox.TextProperty);
@@ -75,7 +76,7 @@ namespace Привязка_и_команды.ViewModels
                 CommandCount++;
             });
 
-            ToggleDangerCommand = new RelayCommand(_ =>
+            ToggleDangerCommand = new RelayCommand(() =>
             {
                 IsDangerMode = !IsDangerMode;
                 CommandCount++;
