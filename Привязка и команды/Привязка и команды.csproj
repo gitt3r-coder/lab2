@@ -14,6 +14,9 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
+    <IncludePackageReferencesDuringMarkupCompilation>true</IncludePackageReferencesDuringMarkupCompilation>
+    <NoWarn>$(NoWarn);CS0414;CS0169;MVVMTK0034</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -90,7 +93,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\DefaultBindingViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\OneTimeBindingViewModel.cs" />
+    <Compile Include="ViewModels\OneWayBindingsViewModel.cs" />
+    <Compile Include="ViewModels\TriggersViewModel.cs" />
+    <Compile Include="ViewModels\TwoWayBindingViewModel.cs" />
     <Compile Include="Views\DefaultBindingView.xaml.cs">
       <DependentUpon>DefaultBindingView.xaml</DependentUpon>
     </Compile>

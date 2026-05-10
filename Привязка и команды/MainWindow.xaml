@@ -9,19 +9,19 @@
     <Grid>
         <TabControl>
             <TabItem Header="Привязка по умолчанию">
-                <views:DefaultBindingView />
+                <views:DefaultBindingView DataContext="{Binding DefaultBinding}" />
             </TabItem>
             <TabItem Header="Двухсторонняя привязка">
-                <views:TwoWayBindingView />
+                <views:TwoWayBindingView DataContext="{Binding TwoWayBinding}" />
             </TabItem>
             <TabItem Header="Одноразовая привязка">
-                <views:OneTimeBindingView />
+                <views:OneTimeBindingView DataContext="{Binding OneTimeBinding}" />
             </TabItem>
             <TabItem Header="Односторонние привязки">
-                <views:OneWayBindingsView />
+                <views:OneWayBindingsView DataContext="{Binding OneWayBindings}" />
             </TabItem>
             <TabItem Header="Триггеры">
-                <views:TriggersView />
+                <views:TriggersView DataContext="{Binding Triggers}" />
             </TabItem>
         </TabControl>
     </Grid>
