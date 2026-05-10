@@ -27,6 +27,7 @@
                                   Width="220"
                                   HorizontalAlignment="Left" />
                         <Button Content="Сохранить через команду" Command="{Binding SaveTwoWayCommand}" />
+                        <TextBlock Text="{Binding SaveMessage}" FontWeight="SemiBold" />
                     </StackPanel>
 
                     <Border Grid.Column="1" Background="{StaticResource PanelBrush}" CornerRadius="8" Padding="14">

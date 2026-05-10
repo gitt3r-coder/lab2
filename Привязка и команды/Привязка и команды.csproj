@@ -89,7 +89,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\DefaultBindingViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\OneTimeBindingViewModel.cs" />
+    <Compile Include="ViewModels\OneWayBindingsViewModel.cs" />
+    <Compile Include="ViewModels\TriggersViewModel.cs" />
+    <Compile Include="ViewModels\TwoWayBindingViewModel.cs" />
     <Compile Include="Views\DefaultBindingView.xaml.cs">
       <DependentUpon>DefaultBindingView.xaml</DependentUpon>
     </Compile>
